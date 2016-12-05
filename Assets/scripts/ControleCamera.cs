@@ -11,6 +11,6 @@
  }
  // Update is called once per frame
 void LateUpdate() {
- transform.position = bola.transform.position + offset;
+		transform.position = new Vector3 (bola.transform.position.x + offset.x, offset.y, bola.transform.position.z + offset.z);
 }
 }
