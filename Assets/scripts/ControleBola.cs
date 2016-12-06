@@ -12,10 +12,11 @@ public class ControleBola : MonoBehaviour
 	public int derrubados;
 	public Text Placar;
 	private float right  = 0.1f;
-
+	private Vector3 originPos;
 	// Use this for initialization
     void Start()
     {
+		originPos = transform.position;
 		pinos = GameObject.FindGameObjectsWithTag("pino");
         derrubados = 0;
         Placar.text ="";
@@ -44,15 +45,15 @@ void FixedUpdate()
 			}
 			if (derrubNow > derrubados)
 				derrubados = derrubNow;
-			Placar.text = "\nderrubados:" + derrubados;
+			Placar.text = ""+derrubados;
 		} else {
-			if (Mathf.Abs(transform.position.x) > 2.0f)
+			if (Mathf.Abs(transform.position.x - originPos.x) > 2.0f)
 			{
 				right *= -1;
 			}
 			transform.Translate(right, 0.0f, 0.0f);
 		}
-		if (transform.position.z < -30 || Mathf.Abs (transform.position.y) > 3f) {
+		if (transform.position.z < -30 || Mathf.Abs (transform.position.x - originPos.x) > 2.5f) {
 			rb.velocity = Vector3.zero;
 		}
 
